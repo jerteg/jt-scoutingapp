@@ -1,14 +1,15 @@
 import os
 import sys
-import streamlit as st
-import pandas as pd
-
-from radar import create_radar
-from shared.templates import template_config
-from shared.data_processing import preprocess_data
 
 BASE_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 sys.path.insert(0, BASE_DIR)
+
+import streamlit as st
+import pandas as pd
+
+from radar_app.radar import create_radar
+from shared.templates import template_config
+from shared.data_processing import preprocess_data
 
 # 🔹 titel
 st.title("JT Radar Tool")
