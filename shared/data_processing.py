@@ -167,6 +167,15 @@ def preprocess_data(data):
     data['Assists per 90'] = data['Assists per 90'].astype(str).str.replace(',', '.', regex=True)
     data['Assists per 90'] = pd.to_numeric(data['Assists per 90'], errors='coerce')
 
+    data['xA per 90'] = data['xA per 90'].astype(str).str.replace(',', '.', regex=True)
+    data['xA per 90'] = pd.to_numeric(data['xA per 90'], errors='coerce')
+
+    data['Shot assists per 90'] = data['Shot assists per 90'].astype(str).str.replace(',', '.', regex=True)
+    data['Shot assists per 90'] = pd.to_numeric(data['Shot assists per 90'], errors='coerce')
+
+    data['Fouls per 90'] = data['Fouls per 90'].astype(str).str.replace(',', '.', regex=True)
+    data['Fouls per 90'] = pd.to_numeric(data['Fouls per 90'], errors='coerce')
+
 
     
     return data
