@@ -224,7 +224,16 @@ report_template = {
             "Shots per 90", 
             "Shots on target, %",
             "Touches in box per 90"
-        ]
+        ],
+        "weights": {
+            "Non-penalty goals per 90": 0.20,
+            "xG per 90": 0.20, 
+            "xG per shot": 0.20, 
+            "Finishing": 0.25, 
+            "Shots per 90": 0.05, 
+            "Shots on target, %": 0.05,
+            "Touches in box per 90": 0.05
+        }
     },
 
     "Chance creation": {
@@ -236,16 +245,29 @@ report_template = {
             "Through passes per pass",
             "Accurate crosses per received pass", 
             "Accurate crosses, %"
-        ]
+        ],
+        "weights": {
+            "Assists per 90": 0.2, 
+            "xA per 90": 0.3, 
+            "Shot assists per 90": 0.2, 
+            "Key passes per pass": 0.1, 
+            "Through passes per pass": 0.1,
+            "Accurate crosses per received pass": 0.05, 
+            "Accurate crosses, %": 0.05
+        }
     },
 
     "Dribbling": {
         "stats": [
             "Successful dribbles per received pass", 
             "Successful dribbles, %", 
-            "Progressive runs per received pass",
-            "Fouls suffered per 90"
-        ]
+            "Progressive runs per received pass"
+        ],
+        "weights": {
+            "Successful dribbles per received pass": 0.3, 
+            "Successful dribbles, %": 0.4, 
+            "Progressive runs per received pass": 0.3
+        }
     },
 
     "Passing": {
@@ -257,7 +279,16 @@ report_template = {
             "Completed passes to penalty area per 90", 
             "Accurate passes to penalty area, %", 
             "Deep completions per 90"
-        ]
+        ],
+        "weights": {
+            "Completed progressive passes per 90": 0.15, 
+            "Accurate progressive passes, %": 0.15,
+            "Completed passes to final third per 90": 0.15, 
+            "Accurate passes to final third, %": 0.15,
+            "Completed passes to penalty area per 90": 0.15, 
+            "Accurate passes to penalty area, %": 0.15, 
+            "Deep completions per 90": 0.1
+        }
     },
 
     "Defending": {
@@ -270,7 +301,16 @@ report_template = {
             "Successful defensive actions per 90",
             "Fouls per 90"
             ],
-        "negative_stats": ['Fouls per 90']
+        "negative_stats": ['Fouls per 90'],
+        "weights": {
+            "Defensive duels won per 90": 0.15,
+            "Defensive duels won, %": 0.25,
+            "Aerial duels won per 90": 0.15,
+            "Aerial duels won, %": 0.25,
+            "PAdj Interceptions": 0.1,
+            "Successful defensive actions per 90": 0.05,
+            "Fouls per 90": 0.05
+        }
     }
 }
         
@@ -312,4 +352,71 @@ position_map = {
     pos: label
     for label, positions in position_labels.items()
     for pos in positions
+}
+
+position_category_weights = {
+
+    "Striker": {
+        "Goalscoring": 0.5,
+        "Chance creation": 0.2,
+        "Dribbling": 0.15,
+        "Passing": 0.1,
+        "Defending": 0.05
+    },
+
+    "Winger": {
+        "Goalscoring": 0.3,
+        "Chance creation": 0.3,
+        "Dribbling": 0.2,
+        "Passing": 0.15,
+        "Defending": 0.05
+    },
+
+    "Attacking Midfielder": {
+        "Goalscoring": 0.2,
+        "Chance creation": 0.3,
+        "Dribbling": 0.2,
+        "Passing": 0.2,
+        "Defending": 0.1
+    },
+
+    "Central Midfielder": {
+        "Goalscoring": 0.15,
+        "Chance creation": 0.25,
+        "Dribbling": 0.20,
+        "Passing": 0.25,
+        "Defending": 0.15
+    },
+
+    "Defensive Midfielder": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.1,
+        "Dribbling": 0.15,
+        "Passing": 0.35,
+        "Defending": 0.35
+    },
+
+    "Centre-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.05,
+        "Dribbling": 0.05,
+        "Passing": 0.35,
+        "Defending": 0.5
+    },
+
+    "Right-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.25,
+        "Dribbling": 0.15,
+        "Passing": 0.25,
+        "Defending": 0.3
+    },
+
+    "Left-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.25,
+        "Dribbling": 0.15,
+        "Passing": 0.25,
+        "Defending": 0.3
+    }
 }
