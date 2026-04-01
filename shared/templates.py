@@ -9,8 +9,8 @@ template_config = {
             'Progressive runs per received pass',
             'Ball progression through passing',
             'Passing accuracy (prog/1/3/forw)',
-            'Defensive duels won per 90', 'Defensive duels won, %',
-            'Aerial duels won per 90', 'Aerial duels won, %',
+            'PAdj Defensive duels won per 90', 'Defensive duels won, %',
+            'PAdj Aerial duels won per 90', 'Aerial duels won, %',
             'PAdj Interceptions'
         ],
         "label": "RB Template",
@@ -30,9 +30,9 @@ template_config = {
              'Progressive runs per received pass', 
              'Ball progression through passing', 
              'Passing accuracy (prog/1/3/forw)',
-             'Defensive duels won per 90', 
+             'PAdj Defensive duels won per 90', 
              'Defensive duels won, %',
-             'Aerial duels won per 90', 
+             'PAdj Aerial duels won per 90', 
              'Aerial duels won, %', 
              'PAdj Interceptions',
              'Fouls per 90'
@@ -44,7 +44,7 @@ template_config = {
              'Ball progression through passing', 
              'Completed progressive passes per 90',
              'Passing accuracy (prog/1/3/forw)', 
-             'Defensive duels won per 90', 
+             'PAdj Defensive duels won per 90', 
              'Defensive duels won, %'
         ]
     },
@@ -59,8 +59,8 @@ template_config = {
             'Progressive runs per received pass',
             'Ball progression through passing',
             'Passing accuracy (prog/1/3/forw)',
-            'Defensive duels won per 90', 'Defensive duels won, %',
-            'Aerial duels won per 90', 'Aerial duels won, %',
+            'PAdj Defensive duels won per 90', 'Defensive duels won, %',
+            'PAdj Aerial duels won per 90', 'Aerial duels won, %',
             'PAdj Interceptions'
         ],
         "label": "LB Template",
@@ -82,11 +82,11 @@ template_config = {
              'Progressive runs per received pass', 
              'Ball progression through passing', 
              'Passing accuracy (prog/1/3/forw)', 
-             'Defensive duels won per 90', 
+             'PAdj Defensive duels won per 90', 
              'Defensive duels won, %',
-             'Aerial duels won per 90', 
+             'PAdj Aerial duels won per 90', 
              'Aerial duels won, %', 
-             'Successful defensive actions per 90',
+             'PAdj Successful defensive actions per 90',
              'PAdj Interceptions',
              'Fouls per 90'
         ],
@@ -98,7 +98,7 @@ template_config = {
              'Progressive runs per received pass', 
              'Ball progression through passing', 
              'Passing accuracy (prog/1/3/forw)', 
-             'Defensive duels won per 90'
+             'PAdj Defensive duels won per 90'
         ]
     },
     
@@ -112,9 +112,9 @@ template_config = {
             'Progressive runs per received pass',
             'Ball progression through passing',
             'Passing accuracy (prog/1/3/forw)',
-            'Defensive duels won per 90','Defensive duels won, %',
-            'Aerial duels won per 90','Aerial duels won, %',
-            'Successful defensive actions per 90',
+            'PAdj Defensive duels won per 90','Defensive duels won, %',
+            'PAdj Aerial duels won per 90','Aerial duels won, %',
+            'PAdj Successful defensive actions per 90',
             'PAdj Interceptions'
         ],
         "label": "CM Template",
@@ -293,22 +293,22 @@ report_template = {
 
     "Defending": {
         "stats": [
-            "Defensive duels won per 90",
+            "PAdj Defensive duels won per 90",
             "Defensive duels won, %",
-            "Aerial duels won per 90",
+            "PAdj Aerial duels won per 90",
             "Aerial duels won, %",
             "PAdj Interceptions",
-            "Successful defensive actions per 90",
+            "PAdj Successful defensive actions per 90",
             "Fouls per 90"
             ],
         "negative_stats": ['Fouls per 90'],
         "weights": {
-            "Defensive duels won per 90": 0.15,
+            "PAdj Defensive duels won per 90": 0.15,
             "Defensive duels won, %": 0.25,
-            "Aerial duels won per 90": 0.15,
+            "PAdj Aerial duels won per 90": 0.15,
             "Aerial duels won, %": 0.25,
             "PAdj Interceptions": 0.1,
-            "Successful defensive actions per 90": 0.05,
+            "PAdj Successful defensive actions per 90": 0.05,
             "Fouls per 90": 0.05
         }
     }
@@ -357,33 +357,33 @@ position_map = {
 position_category_weights = {
 
     "Striker": {
-        "Goalscoring": 0.5,
+        "Goalscoring": 0.55,
         "Chance creation": 0.2,
-        "Dribbling": 0.15,
+        "Dribbling": 0.1,
         "Passing": 0.1,
         "Defending": 0.05
     },
 
     "Winger": {
-        "Goalscoring": 0.3,
+        "Goalscoring": 0.35,
         "Chance creation": 0.3,
-        "Dribbling": 0.2,
+        "Dribbling": 0.15,
         "Passing": 0.15,
         "Defending": 0.05
     },
 
     "Attacking Midfielder": {
-        "Goalscoring": 0.2,
-        "Chance creation": 0.3,
-        "Dribbling": 0.2,
+        "Goalscoring": 0.25,
+        "Chance creation": 0.35,
+        "Dribbling": 0.1,
         "Passing": 0.2,
         "Defending": 0.1
     },
 
     "Central Midfielder": {
-        "Goalscoring": 0.15,
+        "Goalscoring": 0.20,
         "Chance creation": 0.25,
-        "Dribbling": 0.20,
+        "Dribbling": 0.15,
         "Passing": 0.25,
         "Defending": 0.15
     },
@@ -391,8 +391,8 @@ position_category_weights = {
     "Defensive Midfielder": {
         "Goalscoring": 0.05,
         "Chance creation": 0.1,
-        "Dribbling": 0.15,
-        "Passing": 0.35,
+        "Dribbling": 0.1,
+        "Passing": 0.40,
         "Defending": 0.35
     },
 
@@ -407,16 +407,87 @@ position_category_weights = {
     "Right-Back": {
         "Goalscoring": 0.05,
         "Chance creation": 0.25,
-        "Dribbling": 0.15,
-        "Passing": 0.25,
+        "Dribbling": 0.1,
+        "Passing": 0.3,
         "Defending": 0.3
     },
 
     "Left-Back": {
         "Goalscoring": 0.05,
         "Chance creation": 0.25,
-        "Dribbling": 0.15,
-        "Passing": 0.25,
+        "Dribbling": 0.1,
+        "Passing": 0.3,
         "Defending": 0.3
     }
+}
+
+
+# ── League quality multipliers ────────────────────────────────────────────────
+# Top 5 leagues = 1.0 baseline; others scaled proportionally.
+
+LEAGUE_MULTIPLIERS_ALL = {
+    "Premier League":       1.000,
+    "La Liga":              0.949,
+    "Italian Serie A":      0.936,
+    "Bundesliga":           0.935,
+    "Ligue 1":              0.926,
+    "Pro League":           0.884,
+    "Primeira Liga":        0.881,
+    "Liga Profesional":     0.881,
+    "Serie A BRA":          0.878,
+    "Championship":         0.877,
+    "Superligaen":          0.868,
+    "Ekstraklasa":          0.860,
+    "MLS":                  0.858,
+    "Prva HNL":             0.857,
+    "Eliteserien":          0.855,
+    "Super Lig":            0.850,
+    "Eredivisie":           0.850,
+    "Liga Pro":             0.849,
+    "Segunda Division":     0.847,
+    "Swiss Super League":   0.836,
+}
+
+LEAGUE_MULTIPLIERS_NEXT14 = {
+    "Pro League":           1.000,
+    "Primeira Liga":        0.996,
+    "Liga Profesional":     0.996,
+    "Serie A BRA":          0.993,
+    "Championship":         0.991,
+    "Superligaen":          0.981,
+    "Ekstraklasa":          0.973,
+    "MLS":                  0.970,
+    "Prva HNL":             0.969,
+    "Eliteserien":          0.966,
+    "Super Lig":            0.961,
+    "Eredivisie":           0.961,
+    "Liga Pro":             0.960,
+    "Segunda Division":     0.958,
+    "Swiss Super League":   0.945,
+}
+
+TOP5_LEAGUES = {
+    "Premier League",
+    "La Liga",
+    "Italian Serie A",
+    "Bundesliga",
+    "Ligue 1",
+}
+
+NEXT14_LEAGUES = {
+    "Pro League",
+    "Primeira Liga",
+    "Liga Profesional",
+    "Serie A BRA",
+    "Championship",
+    "Superligaen",
+    "Ekstraklasa",
+    "MLS",
+    "Prva HNL",
+    "Eliteserien",
+    "Super Lig",
+    "Eredivisie",
+    "Liga Pro",
+    "Swiss Super League",
+    "Segunda Division"
 }
