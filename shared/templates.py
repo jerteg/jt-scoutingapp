@@ -377,6 +377,175 @@ role_config = {
     },
 }
 
+report_template = {
+
+    "Goalscoring": {
+        "stats": [
+            "Non-penalty goals per 90",
+            "xG per 90", 
+            "xG per shot", 
+            "Finishing", 
+            "Shots per 90", 
+            "Shots on target, %",
+            "Touches in box per 90"
+        ],
+        "weights": {
+            "Non-penalty goals per 90": 0.20,
+            "xG per 90": 0.20, 
+            "xG per shot": 0.20, 
+            "Finishing": 0.25, 
+            "Shots per 90": 0.05, 
+            "Shots on target, %": 0.05,
+            "Touches in box per 90": 0.05
+        }
+    },
+
+    "Chance creation": {
+        "stats": [
+            "Assists per 90", 
+            "xA per 90", 
+            "Shot assists per 90", 
+            "Key passes per pass", 
+            "Through passes per pass",
+            "Accurate crosses per received pass", 
+            "Accurate crosses, %"
+        ],
+        "weights": {
+            "Assists per 90": 0.2, 
+            "xA per 90": 0.3, 
+            "Shot assists per 90": 0.2, 
+            "Key passes per pass": 0.1, 
+            "Through passes per pass": 0.1,
+            "Accurate crosses per received pass": 0.05, 
+            "Accurate crosses, %": 0.05
+        }
+    },
+
+    "Dribbling": {
+        "stats": [
+            "Successful dribbles per received pass", 
+            "Successful dribbles, %", 
+            "Progressive runs per received pass"
+        ],
+        "weights": {
+            "Successful dribbles per received pass": 0.3, 
+            "Successful dribbles, %": 0.4, 
+            "Progressive runs per received pass": 0.3
+        }
+    },
+
+    "Passing": {
+        "stats": [
+            "Completed progressive passes per 90", 
+            "Accurate progressive passes, %",
+            "Completed passes to final third per 90", 
+            "Accurate passes to final third, %",
+            "Completed passes to penalty area per 90", 
+            "Accurate passes to penalty area, %", 
+            "Deep completions per 90"
+        ],
+        "weights": {
+            "Completed progressive passes per 90": 0.15, 
+            "Accurate progressive passes, %": 0.15,
+            "Completed passes to final third per 90": 0.15, 
+            "Accurate passes to final third, %": 0.15,
+            "Completed passes to penalty area per 90": 0.15, 
+            "Accurate passes to penalty area, %": 0.15, 
+            "Deep completions per 90": 0.1
+        }
+    },
+
+    "Defending": {
+        "stats": [
+            "PAdj Defensive duels won per 90",
+            "Defensive duels won, %",
+            "PAdj Aerial duels won per 90",
+            "Aerial duels won, %",
+            "PAdj Interceptions",
+            "PAdj Successful defensive actions per 90",
+            "Fouls per 90"
+            ],
+        "negative_stats": ['Fouls per 90'],
+        "weights": {
+            "PAdj Defensive duels won per 90": 0.15,
+            "Defensive duels won, %": 0.25,
+            "PAdj Aerial duels won per 90": 0.15,
+            "Aerial duels won, %": 0.25,
+            "PAdj Interceptions": 0.1,
+            "PAdj Successful defensive actions per 90": 0.05,
+            "Fouls per 90": 0.05
+        }
+    }
+}
+
+position_category_weights = {
+
+    "Striker": {
+        "Goalscoring": 0.55,
+        "Chance creation": 0.2,
+        "Dribbling": 0.1,
+        "Passing": 0.1,
+        "Defending": 0.05
+    },
+
+    "Winger": {
+        "Goalscoring": 0.35,
+        "Chance creation": 0.3,
+        "Dribbling": 0.15,
+        "Passing": 0.15,
+        "Defending": 0.05
+    },
+
+    "Attacking Midfielder": {
+        "Goalscoring": 0.25,
+        "Chance creation": 0.35,
+        "Dribbling": 0.1,
+        "Passing": 0.2,
+        "Defending": 0.1
+    },
+
+    "Central Midfielder": {
+        "Goalscoring": 0.20,
+        "Chance creation": 0.25,
+        "Dribbling": 0.15,
+        "Passing": 0.25,
+        "Defending": 0.15
+    },
+
+    "Defensive Midfielder": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.1,
+        "Dribbling": 0.1,
+        "Passing": 0.40,
+        "Defending": 0.35
+    },
+
+    "Centre-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.05,
+        "Dribbling": 0.05,
+        "Passing": 0.35,
+        "Defending": 0.5
+    },
+
+    "Right-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.25,
+        "Dribbling": 0.1,
+        "Passing": 0.3,
+        "Defending": 0.3
+    },
+
+    "Left-Back": {
+        "Goalscoring": 0.05,
+        "Chance creation": 0.25,
+        "Dribbling": 0.1,
+        "Passing": 0.3,
+        "Defending": 0.3
+    }
+}
+
+
 # ── Position groups & mappings ────────────────────────────────────────────────
 
 position_groups = {
@@ -461,3 +630,129 @@ LEAGUE_MULTIPLIERS_NEXT14 = {
     "Segunda Division":   0.958,
     "Swiss Super League": 0.945,
 }
+
+
+# ── Radar categorieën ─────────────────────────────────────────────────────────
+# Goalscoring:      4 stats
+# Chance Creation:  4 stats
+# Dribbling:        3 stats
+# Passing:          4 stats
+# Defending:        5 stats
+# Totaal:          20 stats
+
+RADAR_CATEGORIES = {
+    "Goalscoring": {
+        "stats": [
+            "xG per 90",
+            "xG per shot",
+            "Finishing",
+            "Touches in box per 90",
+        ],
+        "negative_stats": [],
+        "color": "#c0392b",
+    },
+    "Chance Creation": {
+        "stats": [
+            "xA per 90",
+            "Shot assists per 90",
+            "Key passes per pass",
+            "Accurate crosses per received pass",
+        ],
+        "negative_stats": [],
+        "color": "#e67e22",
+    },
+    "Dribbling": {
+        "stats": [
+            "Successful dribbles per received pass",
+            "Successful dribbles, %",
+            "Progressive runs per received pass",
+        ],
+        "negative_stats": [],
+        "color": "#d4ac0d",
+    },
+    "Passing": {
+        "stats": [
+            "Completed progressive passes per 90",
+            "Completed passes to final third per 90",
+            "Deep completions per 90",
+            "Passing accuracy (prog/1/3/forw)",
+        ],
+        "negative_stats": [],
+        "color": "#27ae60",
+    },
+    "Defending": {
+        "stats": [
+            "PAdj Defensive duels won per 90",
+            "Defensive duels won, %",
+            "PAdj Aerial duels won per 90",
+            "Aerial duels won, %",
+            "PAdj Interceptions",
+        ],
+        "negative_stats": [],
+        "color": "#2980b9",
+    },
+}
+
+# ── Flat geordende lijst ──────────────────────────────────────────────────────
+ALL_RADAR_STATS = [
+    stat
+    for cat_data in RADAR_CATEGORIES.values()
+    for stat in cat_data["stats"]
+]
+
+# ── Kleur per stat (op basis van categorie) ───────────────────────────────────
+STAT_CATEGORY_COLORS = {
+    stat: cat_data["color"]
+    for cat_data in RADAR_CATEGORIES.values()
+    for stat in cat_data["stats"]
+}
+
+# ── Categorie per stat ────────────────────────────────────────────────────────
+STAT_TO_CATEGORY = {
+    stat: cat_name
+    for cat_name, cat_data in RADAR_CATEGORIES.items()
+    for stat in cat_data["stats"]
+}
+
+# ── League display names ──────────────────────────────────────────────────────
+LEAGUE_DISPLAY_NAMES = {
+    # Top 5
+    "Premier League":   "ENG-1",
+    "La Liga":          "ESP-1",
+    "Italian Serie A":  "ITA-1",
+    "Bundesliga":       "GER-1",
+    "Ligue 1":          "FRA-1",
+    # Next 14
+    "Pro League":           "BEL-1",
+    "Primeira Liga":        "POR-1",
+    "Liga Profesional":     "ARG-1",
+    "Serie A BRA":          "BRA-1",
+    "Championship":         "ENG-2",
+    "Superligaen":          "DEN-1",
+    "Ekstraklasa":          "POL-1",
+    "MLS":                  "USA-1",
+    "Prva HNL":             "CRO-1",
+    "Eliteserien":          "NOR-1",
+    "Super Lig":            "TUR-1",
+    "Eredivisie":           "NED-1",
+    "Liga Pro":             "ECU-1",
+    "Segunda Division":     "ESP-2",
+    "Swiss Super League":   "SUI-1",
+}
+
+FORCE_FLIP_STATS = {
+    # DEFENDING
+    "Def duels won /90",
+    "Def duels won %",
+    "Aerial duels won /90",
+
+    # DRIBBLING
+    "Drib.\n/rec pass",
+    "Drib. %",
+    "Prog. runs\n/rec pass",
+
+    # CHANCE CREATION (links van shot assists)
+    "Crosses\n/rec pass",
+    "Deep compl.\n/90",
+}
+
