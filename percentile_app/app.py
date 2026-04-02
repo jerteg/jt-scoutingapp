@@ -72,6 +72,11 @@ with st.sidebar:
     position_group = st.selectbox("Position Group", list(position_groups.keys()))
     positions = position_groups[position_group]
 
+    score_mode = st.radio(
+        "Score type",
+        ["Model (raw)", "Adjusted (recommended)"]
+    )
+
     countries = ["All"] + sorted(data['Birth country'].dropna().unique())
     country = st.selectbox("Birth country", countries)
 
@@ -86,6 +91,12 @@ with st.sidebar:
     dribbling_range      = st.slider("Dribbling score",       0, 100, (0, 100))
     passing_range        = st.slider("Passing score",         0, 100, (0, 100))
     defending_range      = st.slider("Defending score",       0, 100, (0, 100))
+    if score_mode == "Model (raw)":
+        overall_label = "Overall score (model)"
+    else:
+        overall_label = "Overall score (adjusted)"
+
+    overall_range = st.slider(overall_label, 0, 100, (0, 100))
 
 # ── Filter pool for percentile reference ──────────────────────────────────────
 if league_template == "Top 5 leagues":
@@ -139,6 +150,17 @@ for category, group in report_template.items():
 
     percentile_data[f"{category}_score"] = percentiles[stats].apply(_score_row, axis=1)
 
+    weights = position_category_weights.get(position_group, {})
+
+    def _compute_overall(row):
+        category_scores = {
+            cat: row.get(f"{cat}_score", 0)
+            for cat in report_template
+        }
+        return calculate_overall(category_scores, weights)
+
+    percentile_data["overall_score"] = percentile_data.apply(_compute_overall, axis=1)
+
 # ── Player-level filters ───────────────────────────────────────────────────────
 filtered_data = percentile_data.copy()
 
@@ -156,20 +178,44 @@ filtered_data = filtered_data[
     filtered_data['Defending_score'].between(*defending_range)
 ]
 
+if score_mode == "Model (raw)":
+    overall_filter_scores = filtered_data["overall_score"]
+else:
+    overall_filter_scores = (filtered_data["overall_score"] / 100) ** 0.45 * 100
+
+filtered_data = filtered_data[
+    overall_filter_scores.between(*overall_range)
+]
+
 if filtered_data.empty:
     st.warning("No players found with current filters")
     st.stop()
+
+if score_mode == "Model (raw)":
+    scores_for_ranking = filtered_data["overall_score"]
+else:
+    scores_for_ranking = (filtered_data["overall_score"] / 100) ** 0.45 * 100
+
+min_score = scores_for_ranking.min()
+avg_score = scores_for_ranking.mean()
+max_score = scores_for_ranking.max()
+
+filtered_data["rank"] = scores_for_ranking.rank(method="first", ascending=False)
 
 # ── Player selection ──────────────────────────────────────────────────────────
 players = sorted(filtered_data['Player'].unique())
 player = st.sidebar.selectbox("Player", players)
 
 player_data = filtered_data[filtered_data['Player'] == player].iloc[0]
+player_rank = int(player_data["rank"])
+total_players = len(filtered_data)
 team = player_data['Team within selected timeframe']
 
 category_scores = {cat: player_data.get(f"{cat}_score", 0) for cat in report_template}
 weights = position_category_weights.get(position_group, {})
 overall_score = calculate_overall(category_scores, weights)
+if score_mode == "Adjusted (recommended)":
+    overall_score = (overall_score / 100) ** 0.45 * 100
 
 pos     = player_data["Main Position"]
 age     = player_data["Age"]
@@ -355,7 +401,9 @@ st.markdown(f"""
             {pos} | {team} | {age} yrs | {league} | {minutes} mins
         </div>
         <div style="font-size:12px;color:#888;margin-top:2px;">
-            Template: {position_group} · {league_template}
+            Template: {position_group} · {league_template} <br>
+            Min: {min_score:.0f} | Avg: {avg_score:.0f} | Max: {max_score:.0f} | {score_mode.split()[0]} <br>
+            Ranking: {player_rank} / {total_players}
         </div>
     </div>
     <div style="background:{color};color:white;padding:10px 18px;
